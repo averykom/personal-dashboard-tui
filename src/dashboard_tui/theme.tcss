@@ -1,0 +1,10 @@
+/* Theme-aware by default.
+   Use the command palette "Change Theme" to recolor the full dashboard.
+   If you want fixed custom colors, uncomment and set tokens below.
+
+   Example:
+   $surface: #0f172a;
+   $panel: #1e293b;
+   $accent: #38bdf8;
+   $success: #22c55e;
+*/

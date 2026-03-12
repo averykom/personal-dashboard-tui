@@ -1,0 +1,91 @@
+Screen {
+  layout: vertical;
+  background: $surface;
+}
+
+#dashboard-grid {
+  grid-size: 2 3;
+  grid-gutter: 1;
+  padding: 1;
+  height: 1fr;
+}
+
+#dashboard-grid.dense {
+  grid-gutter: 0;
+  padding: 0 1;
+}
+
+DashboardPanel {
+  border: round $accent;
+  padding: 1;
+  content-align: left top;
+  background: $panel;
+}
+
+DashboardPanel:focus {
+  border: heavy $success;
+}
+
+Header {
+  dock: top;
+}
+
+Footer {
+  dock: bottom;
+}
+
+TaskEditorModal {
+  align: center middle;
+  background: $surface-darken-2 60%;
+}
+
+#task-editor {
+  width: 60;
+  max-width: 90%;
+  padding: 1 2;
+  border: round $accent;
+  background: $panel;
+}
+
+#task-editor-title {
+  text-style: bold;
+  margin-bottom: 1;
+}
+
+#task-editor-help {
+  color: $text-muted;
+  margin-top: 1;
+}
+
+NoteEditorModal {
+  align: center middle;
+  background: $surface-darken-2 60%;
+}
+
+#note-editor {
+  width: 80;
+  height: 24;
+  max-width: 95%;
+  max-height: 90%;
+  padding: 1 2;
+  border: round $accent;
+  background: $panel;
+}
+
+#note-editor-title {
+  text-style: bold;
+  margin-bottom: 1;
+}
+
+#note-editor-note-title {
+  margin-bottom: 1;
+}
+
+#note-editor-body {
+  height: 1fr;
+}
+
+#note-editor-help {
+  color: $text-muted;
+  margin-top: 1;
+}
