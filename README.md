@@ -6,7 +6,7 @@ A starter project for a personal terminal dashboard using [Textual](https://text
 
 - Multi-panel dashboard layout (2x2 grid)
 - Pluggable widget architecture
-- Built-in widgets: system stats, school due dates, tasks, notes
+- Built-in widgets: system stats, school due dates, tasks, notes, GitHub activity
 - Check off tasks directly in the Tasks panel (`Up`/`Down` + `Enter`)
 - Notes panel supports title selection and expandable full note content
 - Config file in `~/.config/dashboard-tui/config.toml`
@@ -59,6 +59,12 @@ Notes pane only (shown while Notes is focused):
 - `e`: edit selected note
 - `Delete`: remove selected note
 
+GitHub pane:
+
+- Shows a GitHub-style contribution heatmap for the configured user
+- Shows the most recent public commit from recent push events
+- Configure under `[widgets.github]`
+
 Each panel title includes its pane number (for example `1. System`, `3. Tasks`).
 
 ## Project Layout
@@ -88,6 +94,23 @@ title = "School"
 url = "https://<your-canvas-host>/feeds/calendars/user_<token>.ics"
 open_url = "https://<your-canvas-host>/"
 days = 10
+```
+
+GitHub pane config example:
+
+```toml
+[widgets.github]
+enabled = true
+title = "GitHub"
+username = "your-github-username"
+repo = "" # optional, e.g. "your-github-username/dashboard"
+token_env = "GITHUB_TOKEN"
+```
+
+Optional (for higher rate limits), set a personal access token in your shell:
+
+```bash
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
 Automatic backups for tasks and notes are configured under `[backup]`:
@@ -126,7 +149,7 @@ The todo file supports plain lines and markdown-style checkboxes:
 
 In the dashboard:
 
-1. Focus the Tasks panel (`1`-`4`).
+1. Focus the Tasks panel (`1`-`9`).
 2. Move selection with `Up` / `Down`.
 3. Press `Enter` to check or uncheck the selected task.
 4. Press `a` to add, `e` to edit, or `Delete` to remove tasks directly.

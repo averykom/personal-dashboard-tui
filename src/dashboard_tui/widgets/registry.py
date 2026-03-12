@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from dashboard_tui.config.settings import Settings
 from dashboard_tui.widgets.base import DashboardWidget, WidgetContext
+from dashboard_tui.widgets.github import GitHubWidget
 from dashboard_tui.widgets.notes import NotesWidget
 from dashboard_tui.widgets.school import SchoolWidget
 from dashboard_tui.widgets.system import SystemWidget
@@ -21,6 +22,7 @@ WIDGETS: dict[str, WidgetDefinition] = {
     "school": WidgetDefinition("school", SchoolWidget),
     "todo": WidgetDefinition("todo", TodoWidget),
     "notes": WidgetDefinition("notes", NotesWidget),
+    "github": WidgetDefinition("github", GitHubWidget),
 }
 
 
@@ -36,12 +38,18 @@ def load_enabled_widgets(settings: Settings) -> list[DashboardWidget]:
         source_url = cfg.url if cfg else None
         open_url = cfg.open_url if cfg else None
         days = cfg.days if cfg else None
+        username = cfg.username if cfg else None
+        repo = cfg.repo if cfg else None
+        token_env = cfg.token_env if cfg else None
         context = WidgetContext(
             title=title,
             source_path=source_path,
             source_url=source_url,
             open_url=open_url,
             days=days,
+            username=username,
+            repo=repo,
+            token_env=token_env,
             backup_enabled=settings.backup.enabled,
             backup_directory=settings.backup.directory,
             backup_keep_latest=settings.backup.keep_latest,

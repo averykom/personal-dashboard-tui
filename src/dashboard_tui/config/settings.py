@@ -45,6 +45,13 @@ path = "~/.config/dashboard-tui/todo.txt"
 enabled = true
 title = "Notes"
 path = "~/.config/dashboard-tui/notes.txt"
+
+[widgets.github]
+enabled = true
+title = "GitHub"
+username = ""
+repo = ""
+token_env = "GITHUB_TOKEN"
 """
 
 DEFAULT_BACKUP_BLOCK = """[backup]
@@ -63,6 +70,13 @@ DEFAULT_CLOCK_DISABLE_BLOCK = """[widgets.clock]
 enabled = false
 title = "Clock"
 """
+DEFAULT_GITHUB_BLOCK = """[widgets.github]
+enabled = true
+title = "GitHub"
+username = ""
+repo = ""
+token_env = "GITHUB_TOKEN"
+"""
 
 
 @dataclass(slots=True)
@@ -73,6 +87,9 @@ class WidgetConfig:
     url: str | None = None
     open_url: str | None = None
     days: int | None = None
+    username: str | None = None
+    repo: str | None = None
+    token_env: str | None = None
 
 
 @dataclass(slots=True)
@@ -138,6 +155,9 @@ def load_settings() -> Settings:
             url=_str_or_none(data.get("url")),
             open_url=_str_or_none(data.get("open_url")),
             days=_int_or_none(data.get("days")),
+            username=_str_or_none(data.get("username")),
+            repo=_str_or_none(data.get("repo")),
+            token_env=_str_or_none(data.get("token_env")),
         )
 
     return Settings(ui=ui, backup=backup, widgets=widgets)
@@ -208,6 +228,8 @@ def _ensure_config_sections(path: Path) -> None:
         updates.append(DEFAULT_SCHOOL_BLOCK.strip())
     if "[widgets.clock]" not in text:
         updates.append(DEFAULT_CLOCK_DISABLE_BLOCK.strip())
+    if "[widgets.github]" not in text:
+        updates.append(DEFAULT_GITHUB_BLOCK.strip())
 
     if not updates:
         return

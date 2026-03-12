@@ -11,6 +11,9 @@ class WidgetContext:
     source_url: str | None = None
     open_url: str | None = None
     days: int | None = None
+    username: str | None = None
+    repo: str | None = None
+    token_env: str | None = None
     backup_enabled: bool = True
     backup_directory: str | None = None
     backup_keep_latest: int = 30
